@@ -1,33 +1,26 @@
-function getFirstSelector(selector) {
-  return document.querySelector(selector);
+const getFirstSelector = function(selector) {
+  return document.querySelector(selector)
 }
 
-function nestedTarget() {
-  return document.querySelector("#nested .target");
+const nestedTarget = function() {
+  return document.querySelector('#nested .target')
 }
 
-function increaseRankBy(n) {
-  var rankedList = document.querySelectorAll("ul.ranked-list li");
-  for (let i = 0; i < rankedList.length; i++) {
-    rankedList[i].innerHTML = parseInt(rankedList[i].innerHTML) + n
+const increaseRankBy = function(n) {
+  const arr = Array.from(document.querySelectorAll('.ranked-list li'))
+  arr.forEach((elem) => elem.innerHTML = parseInt(elem.innerHTML) + n)
+}
+
+const getDeepestChild = function(elem) {
+  const firstChild = elem.children[0]
+  if (firstChild.children.length) {
+    return getDeepestChild(firstChild)
+  } else {
+    return firstChild
   }
 }
 
-function deepestChild() {
-  var current = document.getElementById("grand-node").querySelectorAll("div");
-  var next = [];
-  
-  while (current) {
-    if (current[0].querySelectorAll("div").length === 0) {
-      return current[0]
-    }
-    
-    for (let i = 0; i < current.length; i++) {
-      next.push(current[i].querySelectorAll("div"));
-    }
-    
-    current = next.shift();
-  }
-  
-  return null;
+const deepestChild = function() {
+  const start = document.querySelector('#grand-node')
+  return getDeepestChild(start)
 }
